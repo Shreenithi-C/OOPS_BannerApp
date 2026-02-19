@@ -1,58 +1,80 @@
-/* 
-@author developer
-@version 6
-*/
 class Main
 {
-public static String[] getOPattern()
-{
-return new String[]
-{
-"   ***   ",
-" **   ** ",
-"**     **",
-"**     **",
-"**     **",
-" **   ** ",
-"   ***   ",
-};
+ static class CharacterPatternMap
+ {
+   char character;
+   String[] pattern;
+   CharacterPatternMap(char character,String[] pattern)
+   {
+   this.character=character;
+   this.pattern=pattern;
+   }
+   char getCharacter()
+   {
+   return character;
+   }
+   String[] getPattern()
+   {
+   return pattern;
+   }
+ }
+ static CharacterPatternMap[] createCharacterPatternMaps()
+ {
+	 String oPattern[]={
+    "   ***   ",
+	" **   ** ",
+	"**     **",
+	"**     **",
+	"**     **",
+	" **   ** ",
+	"   ***   "
+	};
+	String pPattern[]={
+    " ******   ",
+	" **    ** ",
+	" **    ** ",
+	" *******  ",
+	" **       ",
+	" **       ",
+	" **       "
+	};
+	String sPattern[]={
+	"  *****  ",
+	" **      ",
+	"**       ",
+	"  *****  ",
+	"      ** ",
+	"**   **  ",
+	" *****   "
+	};
+   CharacterPatternMap o=new CharacterPatternMap('O',oPattern);
+   CharacterPatternMap p=new CharacterPatternMap('P',pPattern);
+   CharacterPatternMap s=new CharacterPatternMap('S',sPattern);
+   
+   return new CharacterPatternMap[]{o,p,s};
+ }
+   static void printMessage(String word, CharacterPatternMap[] charMaps)
+   {
+   for(int row=0;row<7;row++)
+   {
+    for(int i=0;i<word.length();i++)
+	{
+	char ch=word.charAt(i);
+	for(CharacterPatternMap cp:charMaps){
+	if(cp.getCharacter()==ch){
+	System.out.print(cp.getPattern()[row]+" ");
+	}}
+	}
+	System.out.println();
+   }
+   }
+ 
+ public static void main(String[] args)
+ {
+   
+   CharacterPatternMap[] charMaps=createCharacterPatternMaps();
+   printMessage("OOPS",charMaps);
 }
-public static String[] getPPattern()
-{
-return new String[]
-{
-" ******   ",
-" **    ** ",
-" **    ** ",
-" *******  ",
-" **       ",
-" **       ",
-" **       ",
-};
 }
-public static String[] getSPattern()
-{
-return new String[]
-{
-"  *****  ",
-" **      ",
-"**       ",
-"  *****  ",
-"      ** ",
-"**   ** ",
-" *****   "
-};
-}
-public static void main(String[] args)
-{
-String[] oPattern=getOPattern();
-String[] pPattern=getPPattern();
-String[] sPattern=getSPattern();
-
-for(int i=0;i<oPattern.length;i++)
-{
-System.out.println(oPattern[i]+" "+oPattern[i]+" "+pPattern[i]+" "+sPattern[i]);
-}
-
-}
-}
+   
+   
